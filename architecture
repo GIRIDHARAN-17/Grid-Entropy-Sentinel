@@ -1,0 +1,41 @@
+┌──────────────────────────────────────────────────────────────┐
+│                    JUDGE DASHBOARD (Dash/Plotly)              │
+│  Live Freq Gauge │ Home Heatmap │ Attack Alerts │ Demo Buttons │
+└──────────────────────────────────────────────────────────────┘
+                                    │ HTTP/REST
+                                    ▼
+┌──────────────────────────────────────────────────────────────┐
+│                    FASTAPI BACKEND                           │
+│  /grid_status  /act/{home_id}  /island/{cluster}             │
+└─────────┬─────────────────────┬───────────────────────────────┘
+          │                     │                               │
+          ▼                     ▼                               ▼
+ ┌────────┼─────────────┐ ┌─────┴──────┐ ┌───────────────────────┐
+ │       │GRID SIM      │ │   MARL     │ │MICROGRID CONTROLLER  │
+ │ NumPy │PyPSA/Grid2Op │ │ RayRLlib   │ │ Islanding Logic      │
+ │SwingEq│Freq Dynamics │ │ Rule Proxy │ │ Reconnection Logic   │
+ └───────┼──────────────┘ └─────┬──────┘ └───────────────────────┘
+          │                     │                               │
+          └───────MQTT──────────┼───────────────MQTT────────────┘
+                  │             │
+                  ▼             ▼
+┌──────────────────────────────────────────────────────────────┐
+│                 100+ SIMULATED HOMES (MQTT)                  │
+│                                                              │
+│  home/1/telemetry → {"soc":0.7,"pv":2.1,"freq":49.98,...}    │
+│  home/1/commands  ← {"ev":0.3,"ac":24,"battery":0.8,...}     │
+│  ...                                                         │
+│  home/100/telemetry                                          │
+└──────────────────────────────────────────────────────────────┘
+          ▲
+          │ Telemetry Loop (~100ms)
+          │
+ ┌────────┴──────────────┐
+ │ HOME SIMULATOR        │
+ │ - EV charging         │
+ │ - AC cycles           │
+ │ - Battery SoC         │
+ │ - Solar PV output     │
+ │ - Load patterns       │
+ └───────────────────────┘
+

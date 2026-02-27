@@ -7,18 +7,65 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Node.js artifacts
+node_modules/
+dist/
+dist-ssr/
 *.local
 
-# Editor directories and files
-.vscode/*
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+build/
+dist/
+*.egg
+pip-wheel-metadata/
+venv/
+env/
+.venv/
+*.sqlite3
+
+# IDE and editor directories/files
+.vscode/
 !.vscode/extensions.json
-.idea
-.DS_Store
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+.DS_Store
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.test
+.env.production
+.env.example
+
+# Misc
+.qodo
+.vite
+
+# pytest
+.cache/
+coverage.xml
+htmlcov/
+
+# Ray checkpoints or similar
+checkpoints/
+
+# Frontend build
+/dist
+
+# OS generated files
+Thumbs.db
+
+# Ignore virtual environment activation scripts if accidentally added
+**/activate
+**/activate.bat
+**/activate.ps1
