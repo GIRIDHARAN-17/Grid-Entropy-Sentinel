@@ -1,0 +1,16 @@
+1. TELEMETRY COLLECTION [10ms]
+   100 homes → MQTT → Grid2Op → {"freq":49.98, "P_load":520kW}
+
+2. GRID SIMULATION [20ms] 
+   Grid2Op.step() → swing_eq → freq=49.95Hz → broadcast
+
+3. INTELLIGENCE PIPELINE [40ms] PARALLEL:
+   ├── PatchTST → PV_drop_30s = 78% probability [Featherless.ai inference]
+   ├── Ray RLlib → 100 parallel agents → actions[home1..100]
+   └── Attack Detection → correlation=0.82 → "ATTACK!"
+
+4. ACTION DISPATCH [10ms]
+   MQTT → homes/*/commands → {"home1": {"ev":0.3kW, "bat_discharge":2kW}}
+
+5. DASHBOARD UPDATE [20ms]
+   WebSocket → React → Live gauge swings → recovers 48ms
